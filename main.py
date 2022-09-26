@@ -4,5 +4,6 @@
 print("Hello, World!")
 
 
+print("this is type 2")
 
-
+# New line
