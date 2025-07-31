@@ -1,0 +1,179 @@
+
+✅ Project Goal (Recap)
+Create a secure intranet web app that:
+- Displays an org chart of people from an HR DataFrame (PySpark)
+- Pulls user Outlook contacts via EWS
+- Allows adding contacts + writing notes
+- Recommends new contacts based on HR data (e.g., same office, same supervisor)
+- Reads/writes labels inside contact notes
+- Visualizes all this via a JS org chart tool
+
+⚙️ Architecture Overview
+[User] --(intranet)--> [React/Preact Frontend]
+        |                      |
+ Windows Auth (NTLM)    ↕ REST API calls
+        |                      |
+     [FastAPI Backend (Python)] ←→ PySpark (HR DataFrame)
+                |
+         exchangelib (EWS)
+                |
+         On-prem Outlook Exchange
+
+🔗 1. Authentication Layer
+- Method: Windows Integrated Authentication (NTLM or Kerberos)
+- User Flow:
+  - User logs into the intranet; browser passes Windows credentials.
+  - Backend gets current user’s email from REMOTE_USER or similar.
+
+📦 2. Backend Stack
+Use FastAPI in Python for your API.
+- Connects to: Outlook via exchangelib, HR DataFrame via PySpark
+
+Install packages:
+pip install fastapi uvicorn exchangelib pandas pyspark
+
+🔑 3. Exchange Web Services (EWS) Setup
+A. Entity Account with Impersonation Rights
+1. Create service account (svc_contactreader@company.com)
+2. Grant impersonation rights in Exchange Management Shell:
+New-ManagementRoleAssignment –Name:impersonationAssignmentName –Role:ApplicationImpersonation –User:svc_contactreader@company.com
+
+3. Backend Code Example:
+from exchangelib import Credentials, Account, Configuration, DELEGATE, IMPERSONATION
+
+creds = Credentials('svc_contactreader@company.com', 'your_password')
+config = Configuration(server='mail.company.com', credentials=creds)
+
+user_email = get_current_user_email()
+
+account = Account(
+    primary_smtp_address=user_email,
+    config=config,
+    autodiscover=False,
+    access_type=IMPERSONATION
+)
+
+📬 4. Reading & Writing Contacts
+
+A. Read User Contacts
+contacts = account.contacts.all()
+for contact in contacts:
+    print(contact.display_name, contact.notes)
+
+B. Write Contact with Notes
+from exchangelib import Contact
+
+new_contact = Contact(
+    account=account,
+    given_name='Jane',
+    surname='Doe',
+    email_addresses=[('EmailAddress1', 'jane.doe@company.com')],
+    notes="Notes: Great collaborator\nLabels: dev-team, VA-office"
+)
+new_contact.save()
+
+C. Parse Notes for Labels
+import re
+
+def extract_labels(notes):
+    match = re.search(r"Labels:\s*(.*)", notes)
+    return match.group(1).split(',') if match else []
+
+🧠 5. HR Data & Recommendation Logic (PySpark)
+
+A. Load and Filter HR DataFrame
+df = spark.read.parquet("monthly_hr.parquet")
+
+def filter_user_view(user_email):
+    return df.filter(df["email"] == user_email).first()
+
+B. Recommend New Contacts
+def recommend(user_row, all_hr_df):
+    same_manager = all_hr_df.filter(all_hr_df["manager_id"] == user_row["manager_id"])
+    same_office = all_hr_df.filter(all_hr_df["office"] == user_row["office"])
+    return same_manager.union(same_office).distinct()
+
+🧩 6. API Endpoints (Python/FastAPI)
+from fastapi import FastAPI, Depends
+app = FastAPI()
+
+@app.get("/api/contacts")
+def get_contacts(current_user: str = Depends(get_user)):
+    return fetch_outlook_contacts(current_user)
+
+@app.get("/api/hr")
+def get_hr_tree(current_user: str = Depends(get_user)):
+    return get_org_chart(current_user)
+
+@app.get("/api/recommendations")
+def get_recommendations(current_user: str = Depends(get_user)):
+    return get_smart_recommendations(current_user)
+
+@app.post("/api/contact")
+def add_contact(data: dict, current_user: str = Depends(get_user)):
+    return create_outlook_contact(current_user, data)
+
+@app.patch("/api/contact/{contact_id}")
+def update_contact(contact_id: str, data: dict, current_user: str = Depends(get_user)):
+    return update_notes_and_labels(current_user, contact_id, data)
+
+💻 7. Frontend App (React + Preact)
+
+A. Org Chart Visualizer
+Use the provided JS org chart library. Feed it nodes like:
+{
+  id: "123",
+  name: "Jane Doe",
+  title: "Engineer",
+  email: "jane.doe@company.com",
+  labels: ["dev-team", "VA-office"]
+}
+
+B. Filtering & Sorting UI
+- Filter by: Labels, Office, Team
+- Sort by: Name, Title, Last Contacted
+- Search box for live filtering
+
+C. React Component Flow
+App
+ ├── OrgChartView (reads from /api/hr)
+ ├── ContactList (reads from /api/contacts)
+ ├── Recommendations (reads from /api/recommendations)
+ └── AddContactModal (POST to /api/contact)
+
+🔁 8. Data Sync Model
+| Source           | Frequency         | Access       |
+|------------------|------------------|--------------|
+| HR DataFrame     | Monthly batch     | Local file or database |
+| Outlook Contacts | Live              | Fetched via EWS |
+| Contact Notes    | Live              | Read/write via EWS |
+| Recommendations  | Real-time         | From PySpark filters |
+
+📄 9. File Structure
+project-root/
+├── frontend/
+│   ├── components/
+│   ├── orgchart.js
+│   └── App.jsx
+├── backend/
+│   ├── main.py
+│   ├── ews_service.py
+│   ├── hr_recommender.py
+│   └── contact_model.py
+├── data/
+│   └── monthly_hr.parquet
+└── config/
+    └── creds.json / .env
+
+🔐 10. Security & Session Handling
+- All requests are authenticated via intranet Windows Auth
+- Use NTLM headers passed from IIS or Apache reverse proxy
+- No passwords stored in frontend
+- Backend validates user identity every call
+
+❓ Questions I Need from You
+1. Will the HR DataFrame include fields like employee_id, manager_id, office_location, title, etc.?
+2. Can you show me the structure or documentation of the JS org chart library you’ll use?
+3. Will multiple users be using this simultaneously? (Need to handle session isolation)
+4. Are contact labels always inside the notes, or should we also use custom Outlook fields?
+5. Do you want to support exporting the org chart or contact data?
