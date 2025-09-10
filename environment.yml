@@ -1,0 +1,13 @@
+name: my-network-app
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas
+  - streamlit
+  - networkx
+  - openpyxl
+  - pip
+  - pip:
+      - pyvis
