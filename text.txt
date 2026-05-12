@@ -1,0 +1,363 @@
+PBI
+
+Need to add:
+Data: relationships, columns, measures, custom tables
+Slicers and sync slicers and visual interactions
+Parameters - field parameters, what if parameters
+Report subscriptions?
+Forecasting and analysis
+
+
+How to display
+———————————————
+Bookmarks:
+TOP SECTION — “What is a Bookmark?”
+(Small intro + bookmark controls)
+Left Side
+A small text box:
+Suggested Text
+Bookmarks capture the current state of a report page including:
+Visible visuals
+Filters & slicers
+Drill state
+Spotlight/focus
+Sort order
+Common Uses:
+Navigation
+Show/Hide Panels
+Popups
+Guided Storytelling
+Tabs & App-like Experiences
+Keep this short.
+
+Right Side
+A visible:
+Bookmark Pane screenshot OR
+Live bookmark navigator/buttons
+You want users to immediately recognize:
+Where bookmarks are managed
+That bookmarks are clickable states
+Important Things to Show
+Add bookmark
+Update bookmark
+Rename bookmark
+Bookmark order
+“Data” checkbox
+“Display” checkbox
+“Current page” checkbox
+These are VERY important and often misunderstood.
+
+MIDDLE SECTION — “Core Bookmark Use Cases”
+This is the MOST IMPORTANT section.
+Create 3 mini demos side-by-side.
+
+Demo 1 — Show/Hide Filter Panel
+Visual Setup
+Main chart
+Hidden filter pane on right side
+Button labeled “Filters”
+Interaction
+Click button:
+Panel slides/shows
+Click X to hide
+What This Teaches
+Selection pane
+Visibility control
+Show/hide UX
+Bookmark actions
+Tiny Note
+Most common real-world bookmark use case
+
+Demo 2 — Tabbed Navigation
+Visual Setup
+Create fake tabs:
+Sales
+Profit
+Customers
+Each button swaps visible visuals.
+What This Teaches
+Bookmarks can simulate tabs
+Multiple visuals can be layered
+Cleaner dashboards
+Important Focus
+Users should understand:
+The visuals are stacked on top of each other and bookmarks toggle visibility.
+That concept unlocks a LOT.
+
+Demo 3 — Storytelling / Preset Views
+Visual Setup
+One chart.
+Buttons:
+East Region
+West Region
+Central Region
+Each bookmark changes:
+Filters
+Slicers
+Zoom state
+What This Teaches
+Bookmarks can save data states
+“Data” option matters
+Great for executive storytelling
+
+BOTTOM SECTION — “Important Concepts”
+This should feel like a quick-reference cheat sheet.
+
+Left Side — Bookmark Settings
+Small labeled visual:
+Data = saves slicers/filters
+Display = saves visible objects
+Current Page = saves page navigation
+This is one of the MOST nuanced parts of bookmarks.
+You should absolutely include this.
+
+Middle — Selection Pane
+Show:
+Eye icons
+Layer ordering
+Grouping visuals
+Tiny Note
+Bookmarks usually work together with the Selection Pane.
+This connection is critical.
+
+Right Side — Common Patterns
+Simple icons/examples:
+Popups
+Navigation menus
+Help overlays
+Drillthrough menus
+Tooltip panels
+Mobile menu flyouts
+This helps users think creatively.
+
+MOST IMPORTANT THINGS TO EMPHASIZE
+1. Bookmarks Save STATES
+This is the core mental model.
+Not “screens.” Not “buttons.”
+States
+———————————————
+Custom Visuals:
+SECTION 1 — “How to Add a Custom Visual”
+(Top Left — about 25% width)
+This should be SIMPLE.
+Include:
+A cropped screenshot of:
+Visual pane
+“…” menu
+“Get more visuals”
+Then a tiny numbered flow:
+
+1. Open Visualizations pane
+2. Click …
+3. Get more visuals
+4. Import from AppSource or file
+
+You can also include a second tiny screenshot showing:
+imported visual appearing in visual pane
+
+SECTION 2 — Example Custom Visuals
+(Main Focus — about 60–70% of page)
+THIS is the important part.
+Users learn custom visuals best visually.
+Recommended visuals to showcase
+You want a mix of:
+practical
+common
+visually distinct
+demonstrates why custom visuals exist
+
+Suggested 2x3 Grid
+Row 1
+Visual	Why it matters
+Chiclet Slicer	Button/grid slicers
+Word Cloud	Text frequency visualization
+Sankey	Flow relationships
+Row 2
+Visual	Why it matters
+Gantt Chart	Project timelines
+HierarchySlicer	Better hierarchical filtering
+Bullet Chart	KPI target comparison
+How to Display Each Example
+For EACH example:
+tiny screenshot/mockup
+visual name
+one-line use case
+Example format:
+
+[mini screenshot]
+
+Chiclet Slicer
+Grid/button slicer layout
+
+Keep each example VERY compact.
+Think:
+“visual catalog”
+NOT:
+“tutorial”
+
+SECTION 3 — Important Notes / Nuances
+(Bottom strip across page)
+This is where text matters.
+Use icons or warning/callout styling.
+
+Include These Key Points
+🔒 Certification
+
+Certified visuals are Microsoft validated.
+Non-certified visuals may have limitations.
+
+This is probably the MOST important nuance.
+
+⚡ Performance
+
+Too many custom visuals can slow reports.
+
+Very useful practical note.
+
+🌐 AppSource vs File Import
+
+Import from:
+• AppSource (recommended)
+• .pbiviz file
+
+
+📤 Sharing Considerations
+
+Recipients also need access to the visual.
+
+Very commonly forgotten.
+———————————————
+Buttons and Navigation
+LEFT SECTION — “Button Types” (MOST IMPORTANT)
+This should visually show every major button style in one place.
+Create a small grid of buttons
+You want actual clickable buttons users recognize instantly.
+Include these examples:
+Button Type	What to Show
+Blank button	simple custom button
+Back button	back arrow
+Page navigator	horizontal tabs
+Bookmark navigator	tab switching
+Drill-through button	disabled/enabled state
+Reset button	reset icon
+Information button	“i” tooltip button
+Shape/Image as button	clickable image
+IMPORTANT:
+Show:
+default state
+hover state
+disabled state
+This is one of the most useful things people forget.
+Tiny text underneath:
+States: Default • Hover • Pressed • Disabled
+
+3. CENTER SECTION — “Navigation Demo” (CORE CONCEPT)
+This should be the centerpiece.
+Create a fake mini-report navigation experience.
+
+Suggested Display
+Top navigation bar:
+
+[ Sales ] [ Finance ] [ Inventory ] [ HR ]
+
+This demonstrates:
+page navigation
+active state styling
+report app feel
+
+Under it:
+Add 2–3 bookmark buttons:
+
+[ Summary View ] [ Detail View ] [ KPI View ]
+
+This demonstrates:
+bookmark navigation
+view switching
+no page changes required
+
+Then include:
+A drill-through example:
+
+Right-click chart → Drill Through → Customer Detail
+
+Beside it: Add a drill-through button example.
+
+Small Text (Useful Here)
+This is one of the few nuanced things worth explaining:
+Page navigation changes report pages. Bookmark navigation changes views/states on the same page.
+That distinction is extremely important and easy to forget.
+
+4. RIGHT SECTION — “Advanced / Useful Features”
+This section should feel like “things pros use.”
+Include mini examples of:
+
+A. Action Types Table (Very Useful)
+Tiny table:
+Action	Purpose
+Page navigation	Move pages
+Bookmark	Change views
+Back	Return previous page
+Drill-through	Open detail page
+Web URL	Open website
+Q&A	Launch Q&A
+Bookmark + Selection	Show/hide panels
+This table is SUPER valuable for quick reference.
+
+B. Show a Tooltip Button
+Example:
+
+[ i ]
+Hover for instructions
+
+Mention:
+Great for decluttering reports.
+
+C. Show/Hide Panel Example
+This is a VERY modern PBI technique.
+Display:
+
+☰ Filters
+
+Then show:
+hidden panel
+visible panel
+Tiny note:
+Uses bookmarks + selection pane.
+This is probably the most “advanced but practical” concept worth including.
+———————————————
+DAX Calculated columns, explicit measures, tables
+DAX vs M Query 
+	⁃	M Query is the prep stuff, controls flow, variables, functions
+	⁃	DAX is formulaic like excel (excel is cell based, DAX is column based)
+	⁃	Not interchangeable, knowing one != knowing the other. Can do similar things. 
+	⁃	Calculated columns (PBI) vs custom columns (PQ)
+	⁃	Best practice = data cleaning in M Query, can add columns either way, keep it all in one place - that’s best practice, today not working M Query so I’ll show how to do in DAX
+Calculated columns - processing days = DATEDIFF(ship date, order date, days)
+Custom table (New Table) date table - CALENDAR(), Date, day of week, weekday num, week num, year, month
+Day of week, count of orders, sort by asc/desc with ellipses, or sort by column weekday num 
+Implicit vs explicit measures (ie order ID dragged on vs COUNT(order ID), notice that when create a measure it goes to whatever selected data table, watch for where you select. Formatting is great now, renaming, moving tables. ie Sum Profit (note now that we have created one, where is it in the table view?) if you have relationships it can be used across Technically, best practice: _Measures table. I personally don’t subscribe to this but I’ll continue.
+￼
+For DAX (col and meas), context matters and gives priority low=row | med=query | high=filter
+Row = whatever in row - Count unique orders by manager - SUM(RelatedTable(profit))?
+Query = selection actions, relationships, slicers, filters
+Filter = FIXED nothing : count unique orders all managers using CALCULATE, first > SUM(profit) add to table and validate same numbers. second CALCULATE(SUM(profit)), should still be the same. third CALCULATE(SUM(profit),Manager = “”) or , ALL(tablename) and that’s a fixed on nothing
+
+DAX query view, nothing really crazy here. But if you’re building out complex measures this is a creat testing environment without any actual replication. If you want to change a metho, clean it up, you can Define and Evaluate and see if it’s matching the desired. Then go from there 
+
+———————————————
+Power Query
+———————————————
+Power BI Report Server
+———————————————
+Roles and Row-level Security in desktop
+———————————————
+Grouping- bins and lists
+———————————————
+Parameters - field and what if
+Field change an X or Y in a visual change from seeing profit to count orders or country to manager
+What If are just numeric parameters, mostly used for forecasting or financial modeling. Not super super common but possible 
+———————————————
+
+Prompt:
+
+Please help me make a one pager for e following topic. By one pager I literally mean I will have in my report guide a single page that displays a couple of examples and MAYBE some text about it. Text is really only needed on incredibly nuanced or not easy to find stuff. For example, I have a page about slicers, on this page I have a single chart and then every type of slicer dropdown, list, grid, text about how to add search, relative timeline, numeric slider, and how to clear all slicers. That is the type of one pager I am looking for. You can imagine that the user is familiar with PBI but not with the topic below. Please help me mentally have a picture with how to do this with, in your response please walk me through how I should display this, what should display, what to focus on as most importan, and maybe even please provide a suggested layout that you think would be nice 
